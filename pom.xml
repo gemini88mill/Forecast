@@ -7,6 +7,13 @@
     <groupId>groupId</groupId>
     <artifactId>Forecast</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+<dependencies>
+    <dependency>
+        <!-- jsoup HTML parser library @ http://jsoup.org/ -->
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>1.8.1</version>
+    </dependency>
+        </dependencies>
     
 </project>
