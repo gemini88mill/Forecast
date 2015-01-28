@@ -1,12 +1,16 @@
 package io.raphaelmiller;
 
-import jdk.nashorn.internal.parser.JSONParser;
-import jdk.nashorn.internal.runtime.ErrorManager;
-import jdk.nashorn.internal.runtime.Source;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Class used to scrape and collect information from the website inorder to get the 5 day forcast.
@@ -31,8 +35,34 @@ public class WebsiteController {
 
     }
 
-    public void connectUnderground(){
+    public void jParse(){
 
+    }
+
+    public String connectWunderground() throws IOException {
+        String wunderConn = getApiHttp();
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(wunderConn);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1){
+                buffer.append(chars, 0, read);
+            }
+            return buffer.toString();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null){
+                reader.close();
+            }
+        }
+        return wunderConn;
     }
 
     public void argumentParser(String[] argument){

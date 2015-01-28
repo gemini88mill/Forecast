@@ -1,5 +1,6 @@
 package io.raphaelmiller;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +20,15 @@ public class Main {
         WebsiteController wc = new WebsiteController(cla.clone());
 
 
-        wc.connectUnderground();
+
         wc.HttpQueryBuilder();
+        try {
+            String UrlasText = wc.connectWunderground();
+            System.out.println(UrlasText);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        wc.jParse();
 
 
         System.exit(1);
