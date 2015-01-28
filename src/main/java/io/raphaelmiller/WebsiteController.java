@@ -35,10 +35,10 @@ public class WebsiteController {
      */
     public void HttpQueryBuilder(){
         setApiHttp(WEATHER_UNDERGROUND + WUNDERGROUND_KEY + "/conditions/q/" + queryArgs[1] + "/" + queryArgs[0] + ".json");
-        System.out.println(getApiHttp());
+        //System.out.println(getApiHttp());
     }
 
-    public void jParse(String jsonString){
+    public JsonObject jParse(){
         String json = null;
         try {
              json = connectWunderground(getApiHttp());;
@@ -48,7 +48,7 @@ public class WebsiteController {
         setJsonObject((JsonObject) new JsonParser().parse(json));
         JsonObject jObj = getJsonObject();
 
-        System.out.println("jObj:" + jObj.get("current_observation").getAsJsonObject().get("display_location").getAsJsonObject().get("full").getAsString());
+        //System.out.println("jObj:" + jObj.get("current_observation").getAsJsonObject().get("display_location").getAsJsonObject().get("full").getAsString());
         Output output = new Output(null, null, null, null, null);
 
         output.setLocation(jObj.get("current_observation").getAsJsonObject().get("display_location").getAsJsonObject().get("full").getAsString());
@@ -58,10 +58,11 @@ public class WebsiteController {
         output.setWindGust(jObj.get("current_observation").getAsJsonObject().get("wind_string").getAsString());
 
         System.out.println(output.output());
+
+        return jObj;
     }
 
     public String connectWunderground(String wunderConn) throws IOException {
-        //String wunderConn = getApiHttp();
         BufferedReader reader = null;
         try {
             URL url = new URL(wunderConn);
@@ -103,7 +104,7 @@ public class WebsiteController {
 
         queryArgs = argument[0].split(regex);
         for (int x = 0; x < queryArgs.length; x++) {
-            System.out.println(queryArgs[x]);
+            //System.out.println(queryArgs[x]);
 
         }
     }

@@ -3,6 +3,8 @@ package io.raphaelmiller;
 import com.google.gson.JsonObject;
 
 /**
+ * Output Class: Used to display the output in a nice clean format
+ *
  * Created by raphael on 1/28/15.
  */
 public class Output {

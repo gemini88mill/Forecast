@@ -1,5 +1,7 @@
 package io.raphaelmiller;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -32,19 +34,19 @@ public class Main {
 
         for (int x = 0; x < args.length; x++) {
             cla[x] = args[x];
-            System.out.println(cla[x]);
+            //System.out.println(cla[x]);
         }
         // -------------------------------------------------------------
 
         //calls WebsiteControllerClass
         WebsiteController wc = new WebsiteController(cla.clone());
-        //output = new Output(null, null, null, null, null);
+        output = new Output(null, null, null, null, null);
 
 
         wc.HttpQueryBuilder();
 
-        wc.jParse(UrlasText);
-
+        JsonObject jsonObject = wc.jParse();
+        System.out.println(output.output());
 
         System.exit(1);
     }
