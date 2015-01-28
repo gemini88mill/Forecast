@@ -13,7 +13,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Class used to scrape and collect information from the website inorder to get the 5 day forcast.
+ * Class used to scrape and collect information from the website in order to get the 5 day forcast.
+ * along with any other information needed for program.
  *
  * Created by raphael on 1/27/15.
  */
@@ -28,11 +29,13 @@ public class WebsiteController {
     private String apiHttp = null;
     private File file;
 
+    /**
+     * HttpQuery Builder: Uses weather underground API to retrieve address
+     * for wunderground.json data
+     */
     public void HttpQueryBuilder(){
         setApiHttp(WEATHER_UNDERGROUND + WUNDERGROUND_KEY + "/conditions/q/" + queryArgs[1] + "/" + queryArgs[0] + ".json");
         System.out.println(getApiHttp());
-
-
     }
 
     public void jParse(){
@@ -65,6 +68,18 @@ public class WebsiteController {
         return wunderConn;
     }
 
+    /**
+     * argumentParser method: accepts command line argument String array and
+     * separates by commas and white space.
+     *
+     * Ex: Boston, Ma:
+     *
+     * yields:
+     *
+     * String[0] = Boston
+     * String[1] = MA
+     * @param argument
+     */
     public void argumentParser(String[] argument){
         String regex = ",\\s";
 
@@ -74,6 +89,8 @@ public class WebsiteController {
 
         }
     }
+
+    //-----------------Getters and Setters-----------------
 
     public WebsiteController(String[] argument) {
         this.argument = argument;
