@@ -26,7 +26,8 @@ public class WebsiteController {
     private String[] argument;
     private String[] queryArgs;
     private String apiHttp = null;
-    private File file;
+    private JsonObject jsonObject;
+
 
     /**
      * HttpQuery Builder: Uses weather underground API to retrieve address
@@ -44,10 +45,19 @@ public class WebsiteController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        JsonObject jsonObject = (JsonObject) new JsonParser().parse(json);
-        System.out.println(jsonObject.get("current_observation").getAsJsonObject().get(("temp_f")));
+        setJsonObject((JsonObject) new JsonParser().parse(json));
+        JsonObject jObj = getJsonObject();
 
+        System.out.println("jObj:" + jObj.get("current_observation").getAsJsonObject().get("display_location").getAsJsonObject().get("full").getAsString());
+        Output output = new Output(null, null, null, null, null);
 
+        output.setLocation(jObj.get("current_observation").getAsJsonObject().get("display_location").getAsJsonObject().get("full").getAsString());
+        output.setTemp(jObj.get("current_observation").getAsJsonObject().get("temperature_string").getAsString());
+        output.setFeelsLike(jObj.get("current_observation").getAsJsonObject().get("feelslike_string").getAsString());
+        output.setLocalTime(jObj.get("current_observation").getAsJsonObject().get("observation_time").getAsString());
+        output.setWindGust(jObj.get("current_observation").getAsJsonObject().get("wind_string").getAsString());
+
+        System.out.println(output.output());
     }
 
     public String connectWunderground(String wunderConn) throws IOException {
@@ -105,6 +115,9 @@ public class WebsiteController {
         argumentParser(argument);
     }
 
+    public WebsiteController(){
+    }
+
     public String[] getArgument() {
         return argument;
     }
@@ -119,5 +132,13 @@ public class WebsiteController {
 
     public void setApiHttp(String apiHttp) {
         this.apiHttp = apiHttp;
+    }
+
+    public JsonObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JsonObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }

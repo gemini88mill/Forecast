@@ -16,8 +16,10 @@ import java.util.Scanner;
 public class Main {
 
 
-    private static String[] cla;
+    public static String[] cla;
     private static String UrlasText;
+
+    private static Output output = null;
 
     /**
      * start of program. accepts String arguments and sends them to String[] cla
@@ -36,14 +38,11 @@ public class Main {
 
         //calls WebsiteControllerClass
         WebsiteController wc = new WebsiteController(cla.clone());
+        //output = new Output(null, null, null, null, null);
+
 
         wc.HttpQueryBuilder();
-        /*try {
-            //UrlasText = wc.connectWunderground();
-            //System.out.println(UrlasText);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
         wc.jParse(UrlasText);
 
 
