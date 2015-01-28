@@ -9,12 +9,18 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         cla = new String[args.length];
-        cla = args;
 
-        WebsiteController wc = new WebsiteController(cla[0]);
+        for (int x = 0; x < args.length; x++) {
+            cla[x] = args[x];
+            System.out.println(cla[x]);
+        }
 
-        System.out.println("hello world");
+
+        WebsiteController wc = new WebsiteController(cla.clone());
+
+
         wc.connectUnderground();
+        wc.HttpQueryBuilder();
 
 
         System.exit(1);

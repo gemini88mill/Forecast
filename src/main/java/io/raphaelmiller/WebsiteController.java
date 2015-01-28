@@ -1,6 +1,8 @@
 package io.raphaelmiller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -13,35 +15,51 @@ import java.net.URLConnection;
 public class WebsiteController {
 
     private final String WUNDERGROUND_KEY = "3cfd31d747b993d5";
-    private final String WEATHER_UNDERGROUND = "http://www.wunderground.com/";
+    private final String WEATHER_UNDERGROUND = "http://api.wunderground.com/api/";
 
-    private String argument = null;
+
+    private String[] argument;
+    private String[] queryArgs;
+    private String apiHttp = null;
+
+    public void HttpQueryBuilder(){
+        setApiHttp(WEATHER_UNDERGROUND + WUNDERGROUND_KEY + "/conditions/q/" + queryArgs[1] + "/" + queryArgs[0] + ".json");
+        System.out.println(getApiHttp());
+    }
 
     public void connectUnderground(){
-        try {
-            URL url = new URL(WEATHER_UNDERGROUND);
-            URLConnection conn = url.openConnection();
-            conn.connect();
-            System.out.println(url.getContent());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
+
+
+    }
+
+    public void arguementParser(String[] argument){
+        String regex = ",\\s";
+
+        queryArgs = argument[0].split(regex);
+        for (int x = 0; x < queryArgs.length; x++) {
+            System.out.println(queryArgs[x]);
+
         }
-
     }
 
-    public WebsiteController(String argument){
+    public WebsiteController(String[] argument) {
         this.argument = argument;
+        arguementParser(argument);
     }
 
-    public String getArgument() {
+    public String[] getArgument() {
         return argument;
     }
 
-    public void setArgument(String argument) {
+    public void setArgument(String[] argument) {
         this.argument = argument;
+    }
+
+    public String getApiHttp() {
+        return apiHttp;
+    }
+
+    public void setApiHttp(String apiHttp) {
+        this.apiHttp = apiHttp;
     }
 }
