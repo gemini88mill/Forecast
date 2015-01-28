@@ -1,11 +1,12 @@
 package io.raphaelmiller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.ErrorManager;
+import jdk.nashorn.internal.runtime.Source;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 /**
  * Class used to scrape and collect information from the website inorder to get the 5 day forcast.
@@ -21,18 +22,20 @@ public class WebsiteController {
     private String[] argument;
     private String[] queryArgs;
     private String apiHttp = null;
+    private File file;
 
     public void HttpQueryBuilder(){
         setApiHttp(WEATHER_UNDERGROUND + WUNDERGROUND_KEY + "/conditions/q/" + queryArgs[1] + "/" + queryArgs[0] + ".json");
         System.out.println(getApiHttp());
+
+
     }
 
     public void connectUnderground(){
 
-
     }
 
-    public void arguementParser(String[] argument){
+    public void argumentParser(String[] argument){
         String regex = ",\\s";
 
         queryArgs = argument[0].split(regex);
@@ -44,7 +47,7 @@ public class WebsiteController {
 
     public WebsiteController(String[] argument) {
         this.argument = argument;
-        arguementParser(argument);
+        argumentParser(argument);
     }
 
     public String[] getArgument() {
