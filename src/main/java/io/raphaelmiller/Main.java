@@ -17,6 +17,7 @@ public class Main {
 
 
     private static String[] cla;
+    private static String UrlasText;
 
     /**
      * start of program. accepts String arguments and sends them to String[] cla
@@ -37,13 +38,13 @@ public class Main {
         WebsiteController wc = new WebsiteController(cla.clone());
 
         wc.HttpQueryBuilder();
-        try {
-            String UrlasText = wc.connectWunderground();
-            System.out.println(UrlasText);
+        /*try {
+            //UrlasText = wc.connectWunderground();
+            //System.out.println(UrlasText);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        wc.jParse();
+        }*/
+        wc.jParse(UrlasText);
 
 
         System.exit(1);

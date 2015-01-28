@@ -1,7 +1,6 @@
 package io.raphaelmiller;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,12 +37,21 @@ public class WebsiteController {
         System.out.println(getApiHttp());
     }
 
-    public void jParse(){
+    public void jParse(String jsonString){
+        String json = null;
+        try {
+             json = connectWunderground(getApiHttp());;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JsonObject jsonObject = (JsonObject) new JsonParser().parse(json);
+        System.out.println(jsonObject.get("current_observation").getAsJsonObject().get(("temp_f")));
+
 
     }
 
-    public String connectWunderground() throws IOException {
-        String wunderConn = getApiHttp();
+    public String connectWunderground(String wunderConn) throws IOException {
+        //String wunderConn = getApiHttp();
         BufferedReader reader = null;
         try {
             URL url = new URL(wunderConn);
