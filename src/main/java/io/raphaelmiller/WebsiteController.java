@@ -1,15 +1,13 @@
 package io.raphaelmiller;
 
-import com.google.gson.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * Class used to scrape and collect information from the website in order to get the 5 day forcast.
@@ -38,6 +36,19 @@ public class WebsiteController {
         //System.out.println(getApiHttp());
     }
 
+    /**
+     * jParse:
+     *
+     * method jParse uses the Gson library
+     *
+     * uses the included connection method and parse the Json data into useful analytics
+     * for the user. Currently (ver 1.0) outputs and sends useful data to Output Class
+     * which formats the data into a text based printout.
+     *
+     * @see io.raphaelmiller.Output
+     * @see com.google.gson.Gson
+     * @return JsonObject
+     */
     public JsonObject jParse(){
         String json = null;
         try {
@@ -62,6 +73,18 @@ public class WebsiteController {
         return jObj;
     }
 
+
+    /**
+     * connectWunderground:
+     *
+     * uses wunderground API to connect to Json file on weatherunderground website.
+     *
+     * reads stream and returns a string representation of .json file. 
+     *
+     * @param wunderConn
+     * @return
+     * @throws IOException
+     */
     public String connectWunderground(String wunderConn) throws IOException {
         BufferedReader reader = null;
         try {

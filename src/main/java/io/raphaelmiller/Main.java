@@ -40,13 +40,8 @@ public class Main {
 
         //calls WebsiteControllerClass
         WebsiteController wc = new WebsiteController(cla.clone());
-        output = new Output(null, null, null, null, null);
-
-
         wc.HttpQueryBuilder();
-
         JsonObject jsonObject = wc.jParse();
-        System.out.println(output.output());
 
         System.exit(1);
     }
