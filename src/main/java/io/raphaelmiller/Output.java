@@ -43,6 +43,7 @@ public class Output {
 
 
     public String output(){
-        return temp + " " + localTime + " " + location + " " + feelsLike + " " + windGust;
+        return "Current Temp:\t " + temp + "\nLocal Time:\t\t " + localTime + "\nLocation:\t\t " + location +
+                "\nFeels Like:\t\t " + feelsLike + "\nWind:\t\t\t " + windGust;
     }
 }
